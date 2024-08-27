@@ -69,3 +69,7 @@ exports.deleteUser = async (req, res) => {
     }
 };
 
+exports.getProfile = async (req, res) => {
+    res.json({ message: `Welcome ${req.user.name}` });
+};
+
