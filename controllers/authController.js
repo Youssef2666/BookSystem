@@ -1,25 +1,20 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const catchAsync = require('../utils/catchAsync');
 
 // Register a new user
-const register = async (req, res, next) => {
+const register = catchAsync( async (req, res, next) => {
   const { name, email } = req.body;
-
-  try {
     const user = new User({ name, email});
     await user.save();
-    res.json({ message: 'Registration successful' });
-  } catch (error) {
-    next(error);
-  }
-};
+    res.json({ message: 'Registration successful' }); 
+});
 
 // Login with an existing user
-const login = async (req, res, next) => {
+const login = catchAsync( async (req, res, next) => {
   const { name, email } = req.body;
 
-  try {
     const user = await User.findOne({ name });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -29,9 +24,7 @@ const login = async (req, res, next) => {
       expiresIn: '1 hour'
     });
     res.json({ token });
-  } catch (error) {
-    next(error);
-  }
-};
+  
+});
 
 module.exports = { register, login };
