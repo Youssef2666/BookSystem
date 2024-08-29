@@ -18,6 +18,7 @@ app.use('/api', require('./routes/tagRoutes'));
 app.use('/api', require('./routes/genreRoutes'));
 app.use('/api', require('./routes/rateRoutes'));
 app.use('/api', require('./routes/authRoutes'));
+app.use('/api', require('./routes/uploadRoutes'));
 
 // Global error handling middleware
 app.use(globalErrorHandler);
